@@ -19,7 +19,7 @@ class BrontosaurusAPIClient:
         self.session = requests.Session()
         self.session.headers.update({
             "accept": "application/json",
-            "Authorization": api_token,
+            "Authorization": f"Token {api_token}",
             "Content-Type": "application/json"
         })
 
@@ -77,10 +77,10 @@ if __name__ == '__main__':
         # if you do multiple logins, you got quickly interrupted, there is a limit for logins like 5 or 10 logins per hour.
         # logger.info("Attempting to login")
         # login_response = client.post("/auth/login/", json_data=login_data)
-        # logger.info(f"Login successful!")
+        # logger.info("Login successful!")
 
-        # response = client.get("/frontend/events/12747/record/participants/")
-        response = client.post("/api/frontend/events/12740/organizers")
+        # don't forget that the endpoint has to start with slash! /
+        response = client.get("/frontend/events/12747/organizers")
         [print(k, v) for k, v in response.items()]
 
     except Exception as e:
